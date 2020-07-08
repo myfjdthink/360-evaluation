@@ -1,0 +1,14 @@
+@startuml
+
+title: 360评估数据库模型
+
+class Evaluation<<评估记录>> {
+  ..fields..
+  #id
+  #member-评估人
+  #evaluated-被评估人
+  #optionName-评估项目
+  #score-分数
+  #type-类型 negative or positive
+}
+@enduml

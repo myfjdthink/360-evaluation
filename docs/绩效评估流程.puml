@@ -1,0 +1,29 @@
+@startuml
+
+title: 绩效评估流程
+
+actor Member
+actor 管理员 as admin
+control 360评估系统 as SM
+database DB
+
+
+== 新建员工数据 ==
+admin -> SM: 设置员工信息
+admin -> SM: 设置评估选项
+
+== 评估过程 ==
+Member -> SM: 打开评估页面
+SM <- SM: 计算当前用户需要评估的对象
+note bottom : 不同角色需要评估的对象不一样
+Member <- SM: 返回待评估列表
+Member -> SM: 评估一人保存一次
+Member -> SM: 完成所有人评估后，预览确认
+
+== 。。。等待所有人完成评估。。。==
+
+== 结果查看 ==
+Member -> SM: 请求查看结果
+SM -> SM: 实时计算单人总分
+SM -> SM: 实时总体分布图
+@enduml
