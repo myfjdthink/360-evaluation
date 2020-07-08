@@ -11,6 +11,6 @@
 
 ## 技术方案选型
  
- 数据库：TODO
- 应用部署：Docker
- API Doc：Swagger
+ - 数据库：TODO
+ - 应用部署：Docker
+ - API Doc：Swagger
