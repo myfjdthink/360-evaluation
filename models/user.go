@@ -8,21 +8,21 @@ type User struct {
 	Name string
 }
 
-func AddUser(name string) error {
+func AddUser(name string) (*User, error) {
 	u := &User{
 		Name: name,
 	}
 
 	if err := db.Create(&u).Error; err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return u, nil
 }
 
 func GetUserByName(name string) (*User, error) {
 	var u User
-	err := db.Select("Name").Where("Name = ?", name).First(&u).Error
+	err := db.Select("name").Where("name = ?", name).First(&u).Error
 	if err != nil {
 		return nil, err
 	}

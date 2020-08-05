@@ -14,7 +14,8 @@ type Model struct {
 
 func Setup() {
 	var err error
-	db, err = gorm.Open("sqlite3", "/tmp/gorm.db")
+	sqlite3FilePath := "/tmp/data.sqlite"
+	db, err = gorm.Open("sqlite3", sqlite3FilePath)
 
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
@@ -22,5 +23,5 @@ func Setup() {
 
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
-	fmt.Println("sqlite3 conn success...")
+	fmt.Println("sqlite3 conn " + sqlite3FilePath + " success...")
 }

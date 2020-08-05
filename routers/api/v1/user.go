@@ -20,13 +20,13 @@ func Hello(c *gin.Context) {
 
 func AddUser(c *gin.Context) {
 	name := "deo"
-	_, err := models.GetUserByName(name)
-	if err != nil {
+	user, err := models.GetUserByName(name)
+	if user != nil {
 		c.JSON(http.StatusOK, fmt.Sprintf("已存在用户:%s", name))
 		return
 	}
 
-	err = models.AddUser(name)
+	user, err = models.AddUser(name)
 	if err != nil {
 		c.JSON(http.StatusOK, fmt.Sprintf("插入失败:%s", err.Error()))
 		return
