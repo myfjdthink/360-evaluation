@@ -1,4 +1,4 @@
-NAME=aa864451000/360-evaluation
+NAME=deoooo.tencentcloudcr.com/deo/360-evaluation
 TAG=master
 
 build:
