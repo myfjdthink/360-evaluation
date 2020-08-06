@@ -1,8 +1,10 @@
 package main
 
 import (
+	"360-evaluation/config"
 	"360-evaluation/models"
 	"360-evaluation/routers"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,7 +13,8 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
+	r := gin.New()
+	r.Use(gin.Logger(), gin.Recovery())
 	routers.InitRouter(r)
-	r.Run()
+	r.Run(fmt.Sprintf("127.0.0.1:%d", config.Config.Port))
 }
