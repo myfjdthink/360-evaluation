@@ -11,7 +11,6 @@ type Response struct {
 }
 
 func Result(code int, data interface{}, msg string, c *gin.Context) {
-	x
 	c.JSON(code, Response{data, msg})
 }
 
