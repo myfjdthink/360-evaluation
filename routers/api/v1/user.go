@@ -1,9 +1,8 @@
 package v1
 
 import (
-	"360-evaluation/models"
+	"360-evaluation/models/response"
 	"360-evaluation/service/user_service"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -11,7 +10,7 @@ import (
 func InitUserRouter(r *gin.RouterGroup) {
 	userApi := r.Group("/user")
 	userApi.GET("/hello", Hello)
-	userApi.GET("/add", AddUser)
+	userApi.POST("/", AddUser)
 }
 
 func Hello(c *gin.Context) {
@@ -20,16 +19,10 @@ func Hello(c *gin.Context) {
 
 func AddUser(c *gin.Context) {
 	name := "deo"
-	user, err := models.GetUserByName(name)
-	if user != nil {
-		c.JSON(http.StatusOK, fmt.Sprintf("已存在用户:%s", name))
-		return
-	}
-
-	user, err = models.AddUser(name)
+	err, user := user_service.AddUser(name)
 	if err != nil {
-		c.JSON(http.StatusOK, fmt.Sprintf("插入失败:%s", err.Error()))
+		response.Err(err.Error(), c)
 		return
 	}
-	c.JSON(http.StatusOK, "插入成功")
+	response.OK(response.UserResponse{User: user}, c)
 }

@@ -5,23 +5,33 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"log"
+	"time"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 type Model struct {
+	ID        uint `gorm:"primary_key"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time `sql:"index"`
 }
 
 func Setup() {
 	var err error
 	sqlite3FilePath := "/tmp/data.sqlite"
-	db, err = gorm.Open("sqlite3", sqlite3FilePath)
+	DB, err = gorm.Open("sqlite3", sqlite3FilePath)
 
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
 	}
 
-	db.DB().SetMaxIdleConns(10)
-	db.DB().SetMaxOpenConns(100)
+	DB.DB().SetMaxIdleConns(10)
+	DB.DB().SetMaxOpenConns(100)
 	fmt.Println("sqlite3 conn " + sqlite3FilePath + " success...")
+	log.Println("initialize db tables...")
+}
+
+func initTables() {
+	DB.AutoMigrate(User{})
 }
