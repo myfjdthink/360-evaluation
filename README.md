@@ -11,6 +11,7 @@
 
 ## 技术方案选型
  
- - 数据库：TODO
+ - 数据库：sqlite
  - 应用部署：Docker
  - API Doc：Swagger
+ - 参数校验：[validator](https://github.com/go-playground/validator)

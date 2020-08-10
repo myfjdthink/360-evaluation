@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"360-evaluation/models/request"
 	"360-evaluation/models/response"
 	"360-evaluation/service/user_service"
 	"github.com/gin-gonic/gin"
@@ -18,8 +19,14 @@ func Hello(c *gin.Context) {
 }
 
 func AddUser(c *gin.Context) {
-	name := "deo"
-	err, user := user_service.AddUser(name)
+	var p request.AddUser
+	err := c.ShouldBindJSON(&p)
+	if err != nil {
+		response.Err(err.Error(), c)
+		return
+	}
+
+	err, user := user_service.AddUser(p.Name)
 	if err != nil {
 		response.Err(err.Error(), c)
 		return
