@@ -14,8 +14,8 @@ func Result(code int, data interface{}, msg string, c *gin.Context) {
 	c.JSON(code, Response{data, msg})
 }
 
-func Err(msg string, c *gin.Context) {
-	Result(http.StatusBadRequest, nil, msg, c)
+func Err(err error, c *gin.Context) {
+	Result(http.StatusBadRequest, nil, err.Error(), c)
 }
 
 func OK(data interface{}, c *gin.Context) {

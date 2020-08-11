@@ -22,13 +22,13 @@ func AddUser(c *gin.Context) {
 	var p request.AddUser
 	err := c.ShouldBindJSON(&p)
 	if err != nil {
-		response.Err(err.Error(), c)
+		response.Err(err, c)
 		return
 	}
 
 	err, user := user_service.AddUser(p.Name)
 	if err != nil {
-		response.Err(err.Error(), c)
+		response.Err(err, c)
 		return
 	}
 	response.OK(response.UserResponse{User: user}, c)
