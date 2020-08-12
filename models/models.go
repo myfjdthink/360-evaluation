@@ -29,9 +29,11 @@ func Setup() {
 	DB.DB().SetMaxIdleConns(10)
 	DB.DB().SetMaxOpenConns(100)
 	fmt.Println("sqlite3 conn " + sqlite3FilePath + " success...")
-	log.Println("initialize db tables...")
+	initTables()
 }
 
 func initTables() {
+	log.Println("Initialize tables...")
 	DB.AutoMigrate(User{})
+	log.Println("Initialize tables Done!")
 }
