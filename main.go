@@ -16,5 +16,8 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 	routers.InitRouter(r)
-	r.Run(fmt.Sprintf("127.0.0.1:%d", config.Config.Port))
+	err := r.Run(fmt.Sprintf("127.0.0.1:%d", config.Config.Port))
+	if err != nil {
+		fmt.Printf("server start fail %e", err)
+	}
 }

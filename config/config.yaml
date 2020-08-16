@@ -1,1 +1,5 @@
 port: 3000
+password: "123456"
+jwt:
+  secret: "360EvaluationSecret"
+  expire: 86400000

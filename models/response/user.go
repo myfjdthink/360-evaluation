@@ -1,7 +1,14 @@
 package response
 
-import "360-evaluation/models"
+import (
+	"time"
+)
 
 type UserResponse struct {
-	User models.User `json:"user"`
+	Name string `json:"name"`
+}
+
+type LoginByPasswordRes struct {
+	Token  string        `json:"token"`
+	Expire time.Duration `json:"expire"`
 }
