@@ -2,13 +2,27 @@
 
 title: 360评估数据库模型
 
-class Evaluation<<评估记录>> {
-  ..fields..
-  #id
-  #member-评估人
-  #evaluated-被评估人
-  #optionName-评估项目
-  #score-分数
-  #type-类型 negative or positive
+class User<<用户>> {
+    ··fields..
+    #name-姓名
+    #password-密码
 }
+
+class EvaluationRecord<<评估记录>> {
+    ..fields..
+    #year-年度
+    #userId-评估人
+    #assesseeId-被评估人
+    #optionName-评估项目
+    #score-分数
+    #content-标题
+}
+
+class Evaluation<<评估项目>> {
+    ..fields..
+    #content-标题
+}
+
+EvaluationRecord "many" *-- "one" Evaluation
+User "one" --* "many" EvaluationRecord
 @enduml
